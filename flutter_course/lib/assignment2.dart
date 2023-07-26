@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,14 +12,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ToDoScreen(),
+      home: ToDoScreen(),
     );
   }
 }
 
 class ToDoScreen extends StatefulWidget {
-  const ToDoScreen({super.key});
-
   @override
   _ToDoScreenState createState() => _ToDoScreenState();
 }
@@ -42,11 +38,9 @@ class _ToDoScreenState extends State<ToDoScreen> {
   }
 
   void removeTask(int index) {
-    String removedTask = tasks.removeAt(index);
     setState(() {
-      if (textController.text == removedTask) {
-        textController.clear();
-      }
+      String task = tasks.removeAt(index);
+      textController.text = task;
     });
   }
 
@@ -54,30 +48,30 @@ class _ToDoScreenState extends State<ToDoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ToDo App'),
+        title: Text('ToDo App'),
       ),
       body: Container(
         alignment: Alignment.topCenter,
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(10.0),
               child: Row(
                 children: [
                   Expanded(
                     child: TextField(
                       controller: textController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'New Task',
                       ),
                       onSubmitted: (_) => addTask(),
                     ),
                   ),
-                  const SizedBox(width: 10.0),
+                  SizedBox(width: 10.0),
                   ElevatedButton(
                     onPressed: addTask,
-                    child: const Text('Add Item'),
-                  ), 
+                    child: Text('Add Item'),
+                  ),
                 ],
               ),
             ),
